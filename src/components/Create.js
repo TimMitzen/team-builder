@@ -10,43 +10,55 @@ const Create = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    resetForm(); //resets the form
+    if (!name.name || !name.email || !name.role){
+       alert("please enter info")
+    }else{
+       props.setTeam([name,...props.team]);
+       setName(startForm);
+    }
+   
     console.log(name.email);
     console.log(name.name);
     console.log(name.role);
+    
   };
 
   const resetForm = event => {
+   event.preventDefault();
     setName(startForm);
   };
   return (
+     <>
     <form onSubmit={handleSubmit}>
       <input
         type="text"
         name="name"
         value={name.name}
         placeholder="Name"
-        onChange={event => handleChange(event)}
+        onChange={handleChange}
       />
       <input
         type="text"
         name="email"
         value={name.email}
         placeholder="Email"
-        onChange={event => handleChange(event)}
+        onChange={handleChange}
       />
       <input
         type="text"
         name="role"
         value={name.role}
         placeholder="Role"
-        onChange={event => handleChange(event)}
+        onChange={handleChange}
       />
-      <textarea name="email" onChange={handleChange} value={name.email}/>
+   
       <button>Submit!</button>
-      <button>Reset</button>
-      <button>Edit</button>
+      <button onClick={resetForm}>Reset</button>
+    <button>Edit</button>
+      
     </form>
+    
+    </>
   );
 };
 
